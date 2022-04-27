@@ -5,9 +5,8 @@ import model.Country;
 import model.Travel;
 import model.TravelAgency;
 import model.TravelType;
+import java.io.IOException;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main extends TravelManager {
 
@@ -15,8 +14,8 @@ public class Main extends TravelManager {
         super(nameOfNameManager);
     }
 
-    public static void main(String[] args) {
-        TravelAgency mirtur = new TravelAgency("BLABLABLA");
+    public static void main(String[] args) throws IOException {
+        TravelAgency Mirtur = new TravelAgency("BLABLABLA");
 
         Travel Ukraine = new Travel(Country.Ukraine, 4, TravelType.recreation, true, 15000);
         Travel USA = new Travel(Country.USA, 7, TravelType.sport, false, 75000);
@@ -29,10 +28,12 @@ public class Main extends TravelManager {
         travelManager.addTravelToTheList(Ukraine);
         travelManager.addTravelToTheList(France);
         travelManager.sortListByPrice();
+        travelManager.printListOfTravel();
 
         travelManager.findTravelByType(TravelType.family);
         travelManager.findTravelByType(TravelType.sport);
 
+        writeCSV();
     }
 }
 

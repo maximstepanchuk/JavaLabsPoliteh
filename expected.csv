@@ -1,0 +1,4 @@
+Country,duration,type,inStock,price
+Ukraine,4,recreation,true,15000
+France,3,family,true,30000
+USA,7,sport,false,75000

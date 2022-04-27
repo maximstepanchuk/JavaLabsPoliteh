@@ -1,72 +1,74 @@
 package model;
 
 public class Travel {
-    public Country country;
-    public int duration_in_days;
-    public TravelType type;
-    public boolean in_stock;
-    public int price_in_uah;
+    private Country country;
+    private int durationInDays;
+    private TravelType type;
+    private boolean inStock;
+    private int priceInUah;
 
-    public Travel(Country country, int duration_in_days, TravelType type, boolean in_stock, int price_in_uah) {
+    public Travel(final Country country, int durationInDays, final TravelType type, boolean inStock, int priceInUah) {
         this.country=country;
-        this.duration_in_days=duration_in_days;
+        this.durationInDays = durationInDays;
         this.type=type;
-        this.in_stock=in_stock;
-        this.price_in_uah=price_in_uah;
+        this.inStock = inStock;
+        this.priceInUah = priceInUah;
     }
 
     public Travel() {
 
     }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    public int getDuration_in_days() {
-        return duration_in_days;
-    }
-
-    public void setDuration_in_days(int duration_in_days) {
-        this.duration_in_days = duration_in_days;
+    public int getDurationInDays() {
+        return durationInDays;
     }
 
     public TravelType getType() {
         return type;
     }
 
-    public void setType(TravelType type) {
-        this.type = type;
-    }
-
-    public boolean isIn_stock() {
-        return in_stock;
-    }
-
-    public void setIn_stock(boolean in_stock) {
-        this.in_stock = in_stock;
-    }
-
-    public int getPrice_in_uah() {
-        return price_in_uah;
-    }
-
-    public void setPrice_in_uah(int price_in_uah) {
-        this.price_in_uah = price_in_uah;
+    public int getPriceInUah() {
+        return priceInUah;
     }
 
     @Override
     public String toString() {
         return "Travel{" +
                 "country=" + country +
-                ", duration_in_days=" + duration_in_days +
+                ", duration_in_days=" + durationInDays +
                 ", type=" + type +
-                ", in_stock=" + in_stock +
-                ", price_in_uah=" + price_in_uah +
+                ", in_stock=" + inStock +
+                ", price_in_uah=" + priceInUah +
                 '}';
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Travel travel = (Travel) o;
+
+        if (durationInDays != travel.durationInDays) return false;
+        if (inStock != travel.inStock) return false;
+        if (priceInUah != travel.priceInUah) return false;
+        if (country != travel.country) return false;
+        return type == travel.type;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = country.hashCode();
+        result = 31 * result + durationInDays;
+        result = 31 * result + type.hashCode();
+        result = 31 * result + (inStock ? 1 : 0);
+        result = 31 * result + priceInUah;
+        return result;
+    }
+
+    public String getHeaders(){
+        return "Country" + "," + "duration" + "," + "type" + "," + "inStock" + "," + "price";
+    }
+
+    public String toCSV(){
+        return country + "," + durationInDays + "," + type+ "," + inStock + "," + priceInUah;
     }
 }
