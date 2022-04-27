@@ -3,9 +3,12 @@ import model.Country;
 import model.Travel;
 import model.TravelType;
 import org.junit.*;
+import org.junit.jupiter.api.Assertions;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
+
 
 import static org.junit.Assert.*;
 
@@ -58,6 +61,20 @@ public class TravelManagerTest {
         assertArrayEquals(travel, travelManager.findTravelByType(TravelType.sport).toArray());
     }
 
+    public String getAllLines(String fileName) throws IOException {
+        FileReader fr = new FileReader(fileName);
+        BufferedReader br = new BufferedReader(fr);
+        String line;
+        StringBuilder allLines = new StringBuilder();
+        while ((line = br.readLine()) != null) {
+            allLines.append(line);
+        }
+        return allLines.toString();
+    }
 
+    @Test
+    public void writeCSV()throws IOException{
+        Assertions.assertEquals(getAllLines("expected.csv"), getAllLines("result.csv"));
+    }
 
 }

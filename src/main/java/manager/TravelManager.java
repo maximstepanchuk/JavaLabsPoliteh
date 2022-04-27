@@ -1,10 +1,7 @@
 package manager;
-
 import model.TravelType;
 import processor.impl.i_TravelManager;
 import model.Travel;
-
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,14 +33,14 @@ public class TravelManager implements i_TravelManager {
 
     @Override
     public List<Travel> sortListByPrice() {
-        listOfTravel.sort(Comparator.comparingInt(Travel::getPrice_in_uah));
+        listOfTravel.sort(Comparator.comparingInt(Travel::getPriceInUah));
         return listOfTravel;
     }
 
 
     @Override
     public List<Travel> sortListByDuration () {
-        Collections.sort(listOfTravel, Comparator.comparingInt(Travel::getDuration_in_days));
+        Collections.sort(listOfTravel, Comparator.comparingInt(Travel::getDurationInDays));
         return listOfTravel;
     }
 
@@ -79,11 +76,8 @@ public class TravelManager implements i_TravelManager {
                     writer.write("\r\n");
                     previousClassName = travel.getClass().getSimpleName();
                 }
-
                 writer.write(travel.toCSV());
                 writer.write("\r\n");
-
-
             }
         }
     }
