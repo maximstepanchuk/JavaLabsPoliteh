@@ -69,4 +69,39 @@ public class Travel {
                 ", price_in_uah=" + price_in_uah +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Travel travel = (Travel) o;
+
+        if (duration_in_days != travel.duration_in_days) return false;
+        if (in_stock != travel.in_stock) return false;
+        if (price_in_uah != travel.price_in_uah) return false;
+        if (country != travel.country) return false;
+        return type == travel.type;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = country.hashCode();
+        result = 31 * result + duration_in_days;
+        result = 31 * result + type.hashCode();
+        result = 31 * result + (in_stock ? 1 : 0);
+        result = 31 * result + price_in_uah;
+        return result;
+    }
+
+    public String getHeaders(){
+        return "Country" + "," + "duration" + "," + "type" + "," + "inStock" + "," + "price";
+    }
+
+    public String toCSV(){
+        return country + "," + duration_in_days+ "," + type+ "," + in_stock+ "," + price_in_uah;
+    }
+
+
+
 }

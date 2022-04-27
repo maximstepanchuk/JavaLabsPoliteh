@@ -4,6 +4,9 @@ import model.TravelType;
 import processor.impl.i_TravelManager;
 import model.Travel;
 
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class TravelManager implements i_TravelManager {
     public String nameOfNameManager;
-    private List<Travel> listOfTravel = new ArrayList<>();
+    public static List<Travel> listOfTravel = new ArrayList<>();
 
 
     public TravelManager(String nameOfNameManager) {
@@ -20,8 +23,9 @@ public class TravelManager implements i_TravelManager {
     }
 
     @Override
-    public void addTravelToTheList(Travel travel) {
+    public List<Travel> addTravelToTheList(Travel travel) {
         listOfTravel.add(travel);
+        return listOfTravel;
     }
 
 
@@ -31,24 +35,16 @@ public class TravelManager implements i_TravelManager {
     }
 
     @Override
-    public void sortListByPrice() {
-        Collections.sort(listOfTravel, new Comparator<Travel>() {
-            @Override
-            public int compare(Travel t1, Travel t2) {
-                return t1.getPrice_in_uah() - t2.getPrice_in_uah();
-            }
-        });
+    public List<Travel> sortListByPrice() {
+        listOfTravel.sort(Comparator.comparingInt(Travel::getPrice_in_uah));
+        return listOfTravel;
     }
 
 
     @Override
-    public void sortListByDuration () {
-        Collections.sort(listOfTravel, new Comparator<Travel>() {
-            @Override
-            public int compare(Travel t1, Travel t2) {
-                return t1.getDuration_in_days() - t2.getDuration_in_days();
-            }
-        });
+    public List<Travel> sortListByDuration () {
+        Collections.sort(listOfTravel, Comparator.comparingInt(Travel::getDuration_in_days));
+        return listOfTravel;
     }
 
     @Override
@@ -59,9 +55,38 @@ public class TravelManager implements i_TravelManager {
     }
 
     @Override
-    public void findTravelByType (TravelType travelType) {
+    public List<Travel> findTravelByType (TravelType travelType) {
         List<Travel> filteredList = listOfTravel.stream()
                 .filter(travel -> travel.getType() == travelType).collect(Collectors.toList());
-        System.out.println(filteredList);
+        return filteredList;
     }
+
+    public List<Travel> getListOfTravel() {
+        return listOfTravel;
+    }
+
+
+
+
+    public static void writeCSV() throws IOException {
+        try (FileWriter writer = new FileWriter("result.csv")){
+
+            String previousClassName = "";
+            for (var travel: listOfTravel){
+
+                if(!travel.getClass().getSimpleName().equals(previousClassName)){
+                    writer.write(travel.getHeaders());
+                    writer.write("\r\n");
+                    previousClassName = travel.getClass().getSimpleName();
+                }
+
+                writer.write(travel.toCSV());
+                writer.write("\r\n");
+
+
+            }
+        }
+    }
+
+
 }

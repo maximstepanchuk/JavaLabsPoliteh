@@ -2,14 +2,15 @@ package processor.impl;
 import model.Travel;
 import model.TravelType;
 
+import java.util.List;
+
 public interface i_TravelManager  {
-    void addTravelToTheList(Travel travel);
-
-
+    List<Travel> addTravelToTheList(Travel travel);
     void deleteTravelFromList(Travel travel);
-    void sortListByPrice();
-    void sortListByDuration();
+    List<Travel> sortListByPrice();
+    List<Travel> sortListByDuration();
     void  printListOfTravel();
-    void findTravelByType(TravelType travelType);
+    List<Travel >findTravelByType(TravelType travelType);
+
 }
 
