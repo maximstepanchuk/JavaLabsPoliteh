@@ -4,11 +4,10 @@ import model.Travel;
 import model.TravelType;
 import org.junit.*;
 import org.junit.jupiter.api.Assertions;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -22,19 +21,22 @@ public class TravelManagerTest {
     private final Travel China = new Travel(Country.China, 7, TravelType.sport, false, 4);
     private final Travel[] sortedTravel = {France, Ukraine, USA, China, Spain};
     private final Travel[] sortedTravelByDuration = {USA, France, Ukraine,  China, Spain};
-    private TravelManager travelManager = new TravelManager("BOB");
+    private TravelManager travelManager;
 
     @Before
     public void setUp() {
+        travelManager = new TravelManager("BOB");
         travelManager.addTravelToTheList(USA);
         travelManager.addTravelToTheList(Ukraine);
         travelManager.addTravelToTheList(France);
         travelManager.addTravelToTheList(Spain);
         travelManager.addTravelToTheList(China);
+
     }
 
     @Test
     public void sortListByPrice() {
+
         assertArrayEquals(sortedTravel, travelManager.sortListByPrice().toArray());
     }
 
@@ -56,6 +58,7 @@ public class TravelManagerTest {
 
     @Test
     public void findTravelByType(){
+
         Travel[] travel = {USA, China};
         travelManager.findTravelByType(TravelType.sport);
         assertArrayEquals(travel, travelManager.findTravelByType(TravelType.sport).toArray());
@@ -76,5 +79,12 @@ public class TravelManagerTest {
     public void writeCSV()throws IOException{
         Assertions.assertEquals(getAllLines("expected.csv"), getAllLines("result.csv"));
     }
+
+    @Test
+    public void regexPlanet(){
+        String[] expectedRegex = {"b12345b", "bas1-2-3-4-5bas", "ABSdfda12-47-56basdA"};
+        assertArrayEquals(expectedRegex, travelManager.getNewText().toArray());}
+
+
 
 }

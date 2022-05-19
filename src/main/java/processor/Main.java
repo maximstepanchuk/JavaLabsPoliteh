@@ -6,10 +6,9 @@ import model.Travel;
 import model.TravelAgency;
 import model.TravelType;
 
-import java.io.FileWriter;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Main extends TravelManager {
 
@@ -37,7 +36,12 @@ public class Main extends TravelManager {
         travelManager.findTravelByType(TravelType.sport);
 
         writeCSV();
+        System.out.println("--------------------------------------------------------------------------------------------------");
+        regexPlanet();
 
     }
+
+
+
 }
 
