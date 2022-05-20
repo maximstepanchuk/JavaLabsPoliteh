@@ -12,6 +12,6 @@ public interface i_TravelManager  {
     List<Travel> sortListByDuration();
     void  printListOfTravel();
     List<Travel >findTravelByType(TravelType travelType);
-    ArrayList<String> getNewText();
+    List<String> getNewText();
 }
 

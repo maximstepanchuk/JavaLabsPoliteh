@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 
 public class TravelManager implements i_TravelManager {
     public String nameOfNameManager;
-    public static List<Travel> listOfTravel = new ArrayList<>();
-    public static ArrayList<String> NewText = new ArrayList<>();
+    public  List<Travel> listOfTravel = new ArrayList<>();
+    public static List<String> newText = new ArrayList<>();
 
     public TravelManager(String nameOfNameManager) {
         this.nameOfNameManager = nameOfNameManager;
@@ -59,8 +59,9 @@ public class TravelManager implements i_TravelManager {
     }
 
     @Override
-    public ArrayList<String> getNewText() {
-        return NewText;
+    public List<String> getNewText() {
+        regexPlanet();
+        return newText;
     }
 
     public List<Travel> getListOfTravel() {
@@ -70,7 +71,7 @@ public class TravelManager implements i_TravelManager {
 
 
 
-    public static void writeCSV() throws IOException {
+    public void writeCSV() throws IOException {
         try (FileWriter writer = new FileWriter("result.csv")){
 
             String previousClassName = "";
@@ -89,16 +90,16 @@ public class TravelManager implements i_TravelManager {
         }
     }
 
-    public static ArrayList<String> regexPlanet(){
+    public static List<String> regexPlanet(){
         String [] text = {"b12345b", "aa1234c", "AC4714EX", "bas1-2-3-4-5bas", "blasdA12-12Asbdf", "ABSdfda12-47-56basdA"};
         String regex = "([a-zA-Z]{1,}\\d{1,4}[a-zA-Z]{1,})|([a-zA-Z]{1,}\\d{1}-\\d{1}-\\d{1}-\\d{1}[a-zA-Z]{1,})|([a-zA-Z]{1,}\\d{1}-\\d{1}-\\d{1}[a-zA-Z]{1,})|([a-zA-Z]\\d{1}-\\d{1}[a-zA-Z]{1,})|([a-zA-Z]{1,}\\d{2}-\\d{1}-\\d{1}[a-zA-Z]{1,})|([a-zA-Z]{1,}\\d{1}-\\d{2}-\\d{1}[a-zA-Z]{1,})|([a-zA-Z]{1,}\\d{1}-\\d{1}-\\d{2}[a-zA-Z]{1,})|([a-zA-Z]{1,}\\d{1}-\\d{2}[a-zA-Z]{1,})|([a-zA-Z]{1,}\\d{2}-\\d{1}[a-zA-Z]{1,})|([a-zA-Z]{1,}\\d{2}-\\d{2}[a-zA-Z]{1,})";
         for (String temp : text){
             if (!temp.matches(regex)){
-                NewText.add(temp);
+                newText.add(temp);
             }
         }
-        System.out.println(NewText);
-        return NewText;
+        System.out.println(newText);
+        return newText;
     }
 
 

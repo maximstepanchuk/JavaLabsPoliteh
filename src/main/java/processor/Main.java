@@ -35,7 +35,7 @@ public class Main extends TravelManager {
         travelManager.findTravelByType(TravelType.family);
         travelManager.findTravelByType(TravelType.sport);
 
-        writeCSV();
+        travelManager.writeCSV();
         System.out.println("--------------------------------------------------------------------------------------------------");
         regexPlanet();
 

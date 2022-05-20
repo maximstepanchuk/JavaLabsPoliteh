@@ -4,6 +4,8 @@ import model.Travel;
 import model.TravelType;
 import org.junit.*;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,6 +25,7 @@ public class TravelManagerTest {
     private final Travel[] sortedTravelByDuration = {USA, France, Ukraine,  China, Spain};
     private TravelManager travelManager;
 
+
     @Before
     public void setUp() {
         travelManager = new TravelManager("BOB");
@@ -33,24 +36,32 @@ public class TravelManagerTest {
         travelManager.addTravelToTheList(China);
 
     }
-
     @Test
     public void sortListByPrice() {
-
+//        travelManager = new TravelManager("BOB");
+//        travelManager.addTravelToTheList(USA);
+//        travelManager.addTravelToTheList(Ukraine);
+//        travelManager.addTravelToTheList(France);
+//        travelManager.addTravelToTheList(Spain);
+//        travelManager.addTravelToTheList(China);
         assertArrayEquals(sortedTravel, travelManager.sortListByPrice().toArray());
     }
 
     @Test
-    public void sortListByDuration(){assertArrayEquals(sortedTravelByDuration, travelManager.sortListByDuration().toArray());}
+    public void sortListByDuration(){
+       // travelManager = new TravelManager("BOB");
+        assertArrayEquals(sortedTravelByDuration, travelManager.sortListByDuration().toArray());}
 
     @Test
     public void addTravelToTheList() {
+        //travelManager = new TravelManager("BOB");
         Travel[] travel = {USA,Ukraine, France, Spain, China};
         assertArrayEquals(travel, travelManager.getListOfTravel().toArray());
     }
 
     @Test
     public void deleteTravelFromList(){
+
         Travel[] travel = {USA,Ukraine, France, Spain};
         travelManager.deleteTravelFromList(China);
         assertArrayEquals(travel, travelManager.getListOfTravel().toArray());
@@ -58,7 +69,7 @@ public class TravelManagerTest {
 
     @Test
     public void findTravelByType(){
-
+       // travelManager = new TravelManager("BOB");
         Travel[] travel = {USA, China};
         travelManager.findTravelByType(TravelType.sport);
         assertArrayEquals(travel, travelManager.findTravelByType(TravelType.sport).toArray());
